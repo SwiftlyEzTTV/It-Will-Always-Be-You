@@ -243,5 +243,23 @@ if (finalCard) {
   observer.observe(finalCard);
 }
 
+// Reveal final message on scroll
+document.addEventListener("DOMContentLoaded", () => {
+  const finalSection = document.querySelector(".final-message");
+  if (!finalSection) return;
+
+  const io = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        finalSection.classList.add("is-visible");
+        io.disconnect();
+      }
+    },
+    { threshold: 0.25 }
+  );
+
+  io.observe(finalSection);
+});
+
 
 
