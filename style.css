@@ -437,6 +437,7 @@ body{
 .final-message{
   position: relative;
   z-index: 20;
+  min-height: 100vh;
 
   width: min(1200px, 94vw);
   margin: 90px auto 140px;
@@ -499,3 +500,4 @@ body{
   transform: rotate(45deg);
   transform-origin: 100% 100%;
 }
+
