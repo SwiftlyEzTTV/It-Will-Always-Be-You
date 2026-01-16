@@ -1,0 +1,569 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap");
+
+:root{
+  --bg1:#120015;
+  --bg2:#050005;
+  --text:#ffd6e8;
+  --muted:#f2a3c7;
+  --panel: rgba(255, 255, 255, 0.06);
+  --panelBorder: rgba(255, 255, 255, 0.10);
+}
+
+/* Apply handwritten to moments section text */
+.moments,
+.moments .moment-text,
+.moments h2 {
+  font-family: "Caveat", cursive;
+}
+
+.moments h2{
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 2.2rem;
+}
+
+.moments .moment-text{
+  font-size: 1.25rem;
+  line-height: 1.35;
+}
+
+/* make sure the whole section is above the background */
+.bottom-glass{
+  position: relative;
+  z-index: 5;
+
+  width: min(1000px, 92vw);
+  margin: 160px auto 120px;
+  display: grid;
+  grid-template-columns: 120px 1fr 120px;
+  align-items: center;
+  gap: 22px;
+}
+
+/* the heart "slot" MUST have size */
+.bottom-heart{
+  width: 110px;
+  height: 100px;
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  filter: drop-shadow(0 10px 16px rgba(0, 255, 120, 0.25));
+}
+
+/* build the heart */
+.bottom-heart::before,
+.bottom-heart::after{
+  content: "";
+  position: absolute;
+  width: 55px;
+  height: 85px;
+  background: #00d26a;         /* green */
+  border-radius: 50px 50px 0 0;
+  top: 0;
+}
+
+.bottom-heart::before{
+  left: 55px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.bottom-heart::after{
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+.bottom-card{
+  padding: 36px 30px;
+  border-radius: 22px;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* FULL PAGE BACKGROUND SLIDESHOW */
+.page-bg{
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: radial-gradient(circle, var(--bg1), var(--bg2));
+}
+
+.page-bg .bg{
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
+  filter: none;
+  transform: none;
+}
+
+.page-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(10, 0, 20, 0.55);
+  z-index: 1;
+}
+
+.page-bg .flash{
+  position:absolute;
+  inset:0;
+  background:white;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity 120ms ease;
+  z-index: 2;
+}
+.page-bg .flash.on{ opacity:0.12; }
+
+/* HERO now scrolls with page */
+.hero{
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  box-sizing: border-box;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero .container{
+  pointer-events: auto;
+}
+
+body{
+  margin: 0;
+  font-family: Georgia, serif;
+  color: var(--text);
+  min-height: 200vh;
+}
+
+/* GLASS CARD */
+.container{
+  text-align: center;
+  width: min(720px, 92vw);
+  padding: 28px 22px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, var(--panel), rgba(255,255,255,0.03));
+  border: 1px solid var(--panelBorder);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  transform: translateY(140px);
+  opacity: 0;
+}
+
+.container.show{
+  animation: riseUp 1.1s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+}
+
+@keyframes riseUp{
+  0%{ transform: translateY(140px); opacity: 0; }
+  70%{ transform: translateY(-10px); opacity: 1; }
+  100%{ transform: translateY(0); opacity: 1; }
+}
+
+/* Heart */
+#heart{
+  position: relative;
+  width: 104px;
+  height: 94px;
+  background: crimson;
+  margin: 0 auto 18px;
+  transform: rotate(-45deg) scale(1);
+  cursor: pointer;
+  transition: transform 0.12s ease-in-out;
+  filter: drop-shadow(0 10px 18px rgba(220, 20, 60, 0.25));
+}
+
+#heart::before,
+#heart::after{
+  content: "";
+  position: absolute;
+  width: 104px;
+  height: 94px;
+  background: crimson;
+  border-radius: 50%;
+}
+#heart::before{ top: -52px; left: 0; }
+#heart::after{ left: 52px; top: 0; }
+
+/* Title + subtitle */
+#message{
+  margin: 0;
+  font-size: clamp(1.2rem, 2.3vw, 1.6rem);
+  letter-spacing: 0.4px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+#sub-message{
+  margin: 10px 0 18px;
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.container.show-text #message{
+  opacity: 1;
+  transform: translateY(0);
+}
+.container.show-sub #sub-message{
+  opacity: 0.9;
+  transform: translateY(0);
+}
+
+/* Sabrina glow */
+.name{
+  color: #11806a;
+  text-shadow:
+    0 0 6px rgba(17, 128, 106, 0.6),
+    0 0 14px rgba(17, 128, 106, 0.4);
+}
+
+/* Word-by-word reveal */
+.words span{
+  opacity: 0;
+  transform: translateY(6px);
+  display: inline-block;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.words span.show{
+  opacity: 0.95;
+  transform: translateY(0);
+}
+
+/* Letter */
+.letter{
+  text-align: left;
+  margin: 14px auto 0;
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.08);
+  max-height: min(260px, 34vh);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.letter p{
+  margin: 0;
+  font-size: clamp(0.95rem, 1.8vw, 1.02rem);
+  line-height: 1.6;
+  color: rgba(255, 214, 232, 0.88);
+}
+.letter p + p{ margin-top: 12px; }
+
+/* Play button */
+#playBtn{
+  margin: 6px auto 14px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.08);
+  color: var(--text);
+  cursor: pointer;
+}
+#playBtn:hover{ background: rgba(255,255,255,0.12); }
+
+/* GALLERY (scroll down) */
+.gallery{
+  position: relative;
+  z-index: 2;
+
+  width: min(2400px, 96vw);
+  margin: 60px auto;
+
+  padding: 20px;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
+}
+
+.gallery-title{
+  margin: 0 0 14px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: rgba(255,214,232,0.92);
+}
+
+.gallery-grid{
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 12px;
+}
+
+.gallery-grid img{
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.35);
+
+  filter: none !important;
+
+  transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
+  transform: translateZ(0);
+  cursor: pointer;
+}
+
+.gallery-grid img:hover{
+  transform: scale(1.06);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.50);
+  filter: saturate(1.08) contrast(1.05);
+}
+
+/* MOMENTS */
+.moments{
+  width: min(1000px, 92vw);
+  margin: 70px auto 120px;
+}
+
+.moments-title{
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 32px;
+  color: #ffd6e8;
+}
+
+.moment{
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 26px;
+  align-items: center;
+  margin-bottom: 42px;
+
+  padding: 22px;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.20);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+}
+
+.moment.reverse{
+  grid-template-columns: 1fr 1.1fr;
+}
+
+.moment.reverse .moment-text{
+  order: 2;
+}
+
+.moment-text{
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: rgba(255,214,232,0.92);
+}
+
+.moment img{
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+
+  /* show full image */
+  object-fit: contain;
+
+  background: rgba(0,0,0,0.35);
+  padding: 6px;
+
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.moment img:hover{
+  transform: scale(1.06);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+}
+
+/* FULLSCREEN LIGHTBOX */
+.lightbox {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 99999 !important;
+  display: none;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox.open {
+  display: block !important;
+}
+
+.lightbox img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  object-fit: contain !important; /* shows entire image */
+}
+
+.lightbox-close {
+  position: fixed !important;
+  top: 14px !important;
+  right: 16px !important;
+  z-index: 100000 !important;
+
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.95);
+  font-size: 30px;
+  line-height: 42px;
+  cursor: pointer;
+}
+.lightbox-close:hover {
+  background: rgba(255,255,255,0.20);
+}
+
+/* FINAL MESSAGE (glass box + green hearts) */
+.final-message{
+  position: relative;
+  z-index: 20;
+  min-height: 100vh;
+
+  width: min(1200px, 94vw);
+  margin: 90px auto 140px;
+
+  display: grid;
+  grid-template-columns: 120px 1fr 120px;
+  align-items: center;
+  gap: 22px;
+}
+
+.final-card{
+  padding: 34px 30px;
+  border-radius: 22px;
+  text-align: left;
+
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.45);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.final-content p{
+  margin: 12px 0;
+  color: rgba(255,214,232,0.92);
+  line-height: 1.7;
+}
+
+/* Green hearts */
+.final-heart{
+  width: 110px;
+  height: 100px;
+  display: block;
+  position: relative;
+  margin: 0 auto;
+
+  filter: drop-shadow(0 10px 16px rgba(0, 255, 120, 0.35));
+}
+
+.final-heart::before,
+.final-heart::after{
+  content: "";
+  position: absolute;
+  width: 55px;
+  height: 85px;
+  background: #00d26a;
+  border-radius: 50px 50px 0 0;
+  top: 0;
+}
+
+.final-heart::before{
+  left: 55px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.final-heart::after{
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+/* Final message reveal animation */
+.final-message{
+  opacity: 0;
+  transform: translateY(28px) scale(0.985);
+  filter: blur(6px);
+  transition: opacity 800ms ease, transform 800ms cubic-bezier(.2,.9,.2,1), filter 800ms ease;
+}
+
+.final-message.is-visible{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* Stagger effect: hearts + card pop in slightly after */
+.final-message .final-heart{
+  transform: translateY(10px) scale(0.95);
+  opacity: 0;
+  transition: transform 700ms cubic-bezier(.2,.9,.2,1), opacity 700ms ease;
+  transition-delay: 120ms;
+}
+.final-message.is-visible .final-heart{
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.final-message .final-card{
+  transform: translateY(12px);
+  opacity: 0;
+  transition: transform 800ms cubic-bezier(.2,.9,.2,1), opacity 800ms ease;
+  transition-delay: 180ms;
+}
+.final-message.is-visible .final-card{
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Floating hearts */
+.final-message.is-visible .final-heart{
+  animation: floaty 3.2s ease-in-out infinite;
+}
+.final-message.is-visible .final-heart:last-child{
+  animation-delay: 0.7s;
+}
+
+@keyframes floaty{
+  0%,100%{ transform: translateY(0) scale(1); }
+  50%{ transform: translateY(-10px) scale(1.02); }
+}
+
+/* Gentle glow pulse on the glass */
+.final-message.is-visible .final-card{
+  animation: glowPulse 4.5s ease-in-out infinite;
+}
+
+@keyframes glowPulse{
+  0%,100%{
+    box-shadow: 0 18px 55px rgba(0,0,0,0.45);
+    border-color: rgba(255,255,255,0.16);
+  }
+  50%{
+    box-shadow: 0 22px 70px rgba(0,0,0,0.55);
+    border-color: rgba(0,210,106,0.25);
+  }
+}
+
