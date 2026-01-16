@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap");
+
 :root{
   --bg1:#120015;
   --bg2:#050005;
@@ -7,11 +9,7 @@
   --panelBorder: rgba(255, 255, 255, 0.10);
 }
 
-
-/* Handwritten (Google Fonts) */
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap");
-
-/* Apply to moments section text */
+/* Apply handwritten to moments section text */
 .moments,
 .moments .moment-text,
 .moments h2 {
@@ -52,17 +50,6 @@
   filter: drop-shadow(0 10px 16px rgba(0, 255, 120, 0.25));
 }
 
-.bottom-card{
-  padding: 36px 30px;
-  border-radius: 22px;
-  text-align: center;
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-  border: 1px solid rgba(255,255,255,0.10);
-  box-shadow: 0 18px 55px rgba(0,0,0,0.45);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
 /* build the heart */
 .bottom-heart::before,
 .bottom-heart::after{
@@ -87,6 +74,16 @@
   transform-origin: 100% 100%;
 }
 
+.bottom-card{
+  padding: 36px 30px;
+  border-radius: 22px;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
 
 /* FULL PAGE BACKGROUND SLIDESHOW */
 .page-bg{
@@ -129,8 +126,8 @@
 
 /* HERO now scrolls with page */
 .hero{
-  position: relative;          /* 🔴 was fixed */
-  min-height: 100vh;           /* full first screen */
+  position: relative;
+  min-height: 100vh;
   display: grid;
   place-items: center;
   padding: 24px;
@@ -147,7 +144,7 @@ body{
   margin: 0;
   font-family: Georgia, serif;
   color: var(--text);
-  min-height: 200vh; /* gives room to scroll to gallery */
+  min-height: 200vh;
 }
 
 /* GLASS CARD */
@@ -287,7 +284,7 @@ body{
   position: relative;
   z-index: 2;
 
-  width: min(2400px, 96vw); /* 👈 wider */
+  width: min(2400px, 96vw);
   margin: 60px auto;
 
   padding: 20px;
@@ -295,6 +292,7 @@ body{
   border: 1px solid rgba(255,255,255,0.10);
   border-radius: 16px;
 }
+
 .gallery-title{
   margin: 0 0 14px;
   text-align: center;
@@ -303,8 +301,8 @@ body{
 }
 
 .gallery-grid{
-  display: grid; !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)); !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   gap: 12px;
 }
 
@@ -319,7 +317,6 @@ body{
 
   filter: none !important;
 
-  /* hover animation */
   transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
   transform: translateZ(0);
   cursor: pointer;
@@ -331,8 +328,7 @@ body{
   filter: saturate(1.08) contrast(1.05);
 }
 
-
-
+/* MOMENTS */
 .moments{
   width: min(1000px, 92vw);
   margin: 70px auto 120px;
@@ -376,23 +372,17 @@ body{
 .moment img{
   width: 100%;
   height: auto;
-
   max-height: 320px;
 
   /* show full image */
   object-fit: contain;
 
-  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));
+  background: rgba(0,0,0,0.35);
   padding: 6px;
-  
-  /* remove forced crop */
-  aspect-ratio: auto;
 
   border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.12);
   box-shadow: 0 12px 28px rgba(0,0,0,0.45);
-
-  background: rgba(0,0,0,0.35);
 
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
@@ -402,7 +392,7 @@ body{
   box-shadow: 0 18px 40px rgba(0,0,0,0.6);
 }
 
-/* --- FULLSCREEN LIGHTBOX (paste at end of file) --- */
+/* FULLSCREEN LIGHTBOX */
 .lightbox {
   position: fixed !important;
   inset: 0 !important;
@@ -420,9 +410,7 @@ body{
   inset: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-
-  /* ✅ shows the entire image */
-  object-fit: contain !important;
+  object-fit: contain !important; /* shows entire image */
 }
 
 .lightbox-close {
@@ -444,17 +432,3 @@ body{
 .lightbox-close:hover {
   background: rgba(255,255,255,0.20);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
