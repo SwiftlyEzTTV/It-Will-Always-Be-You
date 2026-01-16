@@ -538,3 +538,32 @@ body{
   opacity: 1;
 }
 
+/* Floating hearts */
+.final-message.is-visible .final-heart{
+  animation: floaty 3.2s ease-in-out infinite;
+}
+.final-message.is-visible .final-heart:last-child{
+  animation-delay: 0.7s;
+}
+
+@keyframes floaty{
+  0%,100%{ transform: translateY(0) scale(1); }
+  50%{ transform: translateY(-10px) scale(1.02); }
+}
+
+/* Gentle glow pulse on the glass */
+.final-message.is-visible .final-card{
+  animation: glowPulse 4.5s ease-in-out infinite;
+}
+
+@keyframes glowPulse{
+  0%,100%{
+    box-shadow: 0 18px 55px rgba(0,0,0,0.45);
+    border-color: rgba(255,255,255,0.16);
+  }
+  50%{
+    box-shadow: 0 22px 70px rgba(0,0,0,0.55);
+    border-color: rgba(0,210,106,0.25);
+  }
+}
+
