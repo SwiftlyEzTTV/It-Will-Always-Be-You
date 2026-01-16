@@ -501,3 +501,40 @@ body{
   transform-origin: 100% 100%;
 }
 
+/* Final message reveal animation */
+.final-message{
+  opacity: 0;
+  transform: translateY(28px) scale(0.985);
+  filter: blur(6px);
+  transition: opacity 800ms ease, transform 800ms cubic-bezier(.2,.9,.2,1), filter 800ms ease;
+}
+
+.final-message.is-visible{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* Stagger effect: hearts + card pop in slightly after */
+.final-message .final-heart{
+  transform: translateY(10px) scale(0.95);
+  opacity: 0;
+  transition: transform 700ms cubic-bezier(.2,.9,.2,1), opacity 700ms ease;
+  transition-delay: 120ms;
+}
+.final-message.is-visible .final-heart{
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.final-message .final-card{
+  transform: translateY(12px);
+  opacity: 0;
+  transition: transform 800ms cubic-bezier(.2,.9,.2,1), opacity 800ms ease;
+  transition-delay: 180ms;
+}
+.final-message.is-visible .final-card{
+  transform: translateY(0);
+  opacity: 1;
+}
+
